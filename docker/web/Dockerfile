@@ -1,1 +1,1 @@
-FROM undologic/php5
+FROM php:7
