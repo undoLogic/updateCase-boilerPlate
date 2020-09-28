@@ -271,3 +271,10 @@ Logging needs to HELP support and troubleshooting NOT only your development.
 What does that mean, it means create levels of logs. 
 -- Highlevel: should outlines which functions / methods are being accessed and general state
 -- Debug: this can have detailed info which can fill the screen that developers use. So you can put a stop point and look at that state to continue development. 
+
+### Troubleshooting
+Line endings were all messed up by a windows machine. 
+-Logon to the docker machine (docker exec -it docker_web_1 bash)
+-apt-get update
+-apt-get install dos2unix
+-find . -type f -print0 | xargs -0 dos2unix
