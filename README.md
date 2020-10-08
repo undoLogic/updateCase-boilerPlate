@@ -11,23 +11,23 @@ Use Php storm (or terminal) to checkout the github files to your computer. You w
 Before we start any programming purchase the clients chosen layout and add the raw source
 files into the git account, Later the programming will be able to move this into the cakePHP structure. 
 
-### Step 4: Add Ansible / Docker
+### Step 4: Add Launch / Docker
 You can run a simple command to download the files into your project. 
 1. Then you can commit into your project separate from this codebase
 2. In the future if you want to upgrade to the latest version simply download and overwrite 'roles'. You might need to modify your site.yml
 3. Use your terminal and navigate to the base of your project files and run:
 
-#### ALL MODULES (Ansible, Docker, libraries, etc)
-CAUTION: this will replace 'readme' 'ansible' 'docker' if they already exist in your project
+#### ALL MODULES (Launch, Docker, libraries, etc)
+CAUTION: this will replace 'readme' 'launch' 'docker' if they already exist in your project
 
 ```
 svn export https://github.com/undoLogic/updateCase-boilerPlate/trunk/ . --force
 ```
 
-#### Export ONLY ansible (optional)
+#### Export ONLY launch (optional)
 
 ```
-svn export https://github.com/undoLogic/updateCase-boilerPlate/trunk/ansible ansible/.
+svn export https://github.com/undoLogic/updateCase-boilerPlate/trunk/launch launch/.
 ```
 
 #### Export ONLY docker (optional)

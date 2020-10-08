@@ -1,3 +1,0 @@
-[undoapps]
-localhost   ansible_connection=local
-# www.domain.com	ansible_ssh_user=serveruser
