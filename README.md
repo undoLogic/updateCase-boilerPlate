@@ -1,6 +1,8 @@
 # updateCase-boilerPlate
 UpdateCase.com project base - Manage and launch your project with Docker and Ansible
 
+## A. Installation
+
 ### Step 1: Create new Git hub account
 Logon to your git hub account and create a new empty project
 
@@ -77,7 +79,6 @@ First time cleanup and preparation
 - Uncomment date_default_timezone_set('UTC');
 - Ensure gitignore is correct to prevent any large files from being uploaded
 
-
 ### Step 7: Connect UpdateCase Module
 Our system was developed on the notion that changing text and replacing images should be completed by staff WITHOUT technical experience and all other 
 updates should be completed by technical staff. The reason paying a technical programming to fix spelling errors not only is wasting money and time. 
@@ -97,6 +98,65 @@ Ignore cached files
 - change the .gitignore file so the updateCase variant matches the previous step. This will ensure all the updatecase
 are not saved into Git as they are always downloaded as required from the server (not needed to be in vcs)
 
+
+## B. Visual Development
+
+### Step 7: Create all your visual pages (concept ONLY)
+Build up your navigation and build your site without any database or api connections
+- Create all the concept pages in the 'Pages' controller
+- Using the display function so you only have to create the ctp pages and you do NOT need to create a controller/action for each page 
+- Name all your pages in this format: prefix-controller-action.ctp
+eg client_users_edit
+This will only allow (after programming) to limit the logon to 'client' user_types in the Users controller / model using the edit action in the future
+-> This allows to prepare and concept out which pages get the correct prefix in advance.
+
+
+### Step 16: Folder organization with version letter
+All folders (elements, css, js, etc) need to have a letter indicating the version. 
+This letter is also the same as the current layout. 
+Css files also connect to this letter version name: styles-A.css 
+Elements folder should have a directory with the version letter Elements/A/files...
+This setup allows to do quick A/B testing by setting which version letter is active in the beforeFilter
+
+### Step 17: Efficient integration of new scripts
+In order to efficiently integrate new modules, 
+you should store all source files in 'modules/NAME' within the webroot
+1. Test that the script works before you integrate into the cakePHP code
+2. Create a new page WITHOUT using the layout and ensure the script works (linking all scripts to the modules directory)
+3. After you have confirmed it is working in modules and a blank page, next integrate the code into the project using the layout
+4. After it is all working if you want you can refactor the scripts
+
+### Step 10: Add Layout
+Move the layout from the root (that was added at step 3) and into the cakePHP structure
+- WEBROOT/modules/layoutName
+Now integrate into (Views/Layouts/default.ctp) 
+- Add variable in App_controller in the beforeFilter()
+```
+$this->set('baseLayout', $this->webroot.'modules'.DS.'layoutName'.DS);
+```
+
+Now in your view we need to link to the modules path
+-> anywhere you see 'src="assets......' will instead be 'src="<?= $baseLayout; ?>assets......'
+-> This also applies to href, url etc
+
+```
+<img src="assets/img.jpg"/>
+```
+will become
+```
+<img src="<?= $baseLayout; ?>assets/img.jpg"/>
+```
+
+IMPORTANT: Make sure you do NOT change href='#' as this will cause problems if you add "....$base; ?>#...."
+
+### Step 8: Approve
+Approve all the visual changes with your client BEFORE starting any programming, database development, etc. 
+Ideas only really start getting figured out when clients are seeing visual working models. 
+So hold back on programming until the the only feedback you are getting is small changes
+which are easy to complete after programming is approved. 
+Spent time brainstorming with your client and narrow down a very intuitive concept that just feels right.
+
+## Programming
 
 ### Step 9: Adding functional testing
 Allows to setup automated testing to ensure your important functions in your project behave the same before launch. 
@@ -155,28 +215,6 @@ class PageTest extends CakeTestCase
 }
 ```
 
-### Step 10: Add Layout
-Move the layout from the root (that was added at step 3) and into the cakePHP structure
-- WEBROOT/modules/layoutName
-Now integrate into (Views/Layouts/default.ctp) 
-- Add variable in App_controller in the beforeFilter()
-```
-$this->set('baseLayout', $this->webroot.'modules'.DS.'layoutName'.DS);
-```
-
-Now in your view we need to link to the modules path
--> anywhere you see 'src="assets......' will instead be 'src="<?= $baseLayout; ?>assets......'
--> This also applies to href, url etc
-
-```
-<img src="assets/img.jpg"/>
-```
-will become
-```
-<img src="<?= $baseLayout; ?>assets/img.jpg"/>
-```
-
-IMPORTANT: Make sure you do NOT change href='#' as this will cause problems if you add "....$base; ?>#...."
 
 ### Step 11: Bake Models (if required)
 The models are created by using BAKE
@@ -197,19 +235,6 @@ cd app (cd /path/to/app)
 ./Console/cake bake
 ```
 
-### Step 12: Create all your visual pages (concept ONLY)
-Build up your navigation and build your site
-- Create all the concept pages in the 'Pages' controller
-- Using the display function so you only have to create the pages and you do NOT need to create a controller/action for each page (this will compare after approval)
-- Name all your pages in this format: prefix-controller-action.ctp
-eg client_users_edit
-This will only allow 'client' user_types in the Users controller / model using the edit action in the future
--> This allows to prepare and concept out which pages get the correct prefix in advance. 
-
-### Step 13: Approve
-Approve all the visual changes with your client BEFORE starting any programming, database development, etc. Nothing is as bad then when you have done work 
-that needs to be re-started or radically changed because the concept was not approved. 
-At this stage any changes can be easily completed and this helps the client brainstorm with you to create a great intuitive software. 
 
 ### Step 14: Programming
 Now that all the visuals are approved and all the concepts that need to be programmed have been visualized, the programming should now convert
@@ -232,27 +257,13 @@ logic, but with the same name you can easily diagnose issues and find references
 
 ### Step 15: Overview
 At this point you have a fully functional docker running with a custom website all that is left is a way to automate the publishing to your Staging / LIVE locations. 
-Connect Ansible into your pipeline
+Create an automated pipeline
 - Each feature is developed in a branch
 - On completion the changes are committed / pushed to that branch
 - A pull request is created into MASTER
 - Manually if MASTER is working a RELEASE is created 
 - Automated system take the release / test and if success push to LIVE
 
-### Step 16: Folder organization with version letter
-All folders (elements, css, js, etc) need to have a letter indicating the version. 
-This letter is also the same as the current layout. 
-Css files also connect to this letter version name: styles-A.css 
-Elements folder should have a directory with the version letter Elements/A/files...
-This setup allows to do quick A/B testing by setting which version letter is active in the beforeFilter
-
-### Step 17: Efficient integration of new scripts
-In order to efficiently integrate new modules, 
-you should store all source files in 'modules/NAME' within the webroot
-1. Test that the script works before you integrate into the cakePHP code
-2. Create a new page WITHOUT using the layout and ensure the script works (linking all scripts to the modules directory)
-3. After you have confirmed it is working in modules and a blank page, next integrate the code into the project using the layout
-4. After it is all working if you want you can refactor the scripts
 
 ### Step 18: Logging
 Logging needs to HELP support and troubleshooting NOT only your development. 
