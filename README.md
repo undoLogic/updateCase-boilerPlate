@@ -65,6 +65,12 @@ mv 2.x src
 rsync -av libraries/cakePHP/2/. src/app/.
 ```
 
+#### Cleanup files we will not need as we are creating our own in the base instead
+```
+rm src/.gitignore
+rm src/.gitattributes
+```
+
 ### Step 6: Startup docker / test project
 Look into the docker folder
 Right click '2startDocker.sh' OR '3restartDocker.sh'
@@ -162,16 +168,31 @@ Spent time brainstorming with your client and narrow down a very intuitive conce
 Allows to setup automated testing to ensure your important functions in your project behave the same before launch. 
 This allows for rapid development. 
 
-Initialization (Once per computer installation only)
+
+MAC Initialization (Once per computer installation only)
 ```
 curl "https://phar.phpunit.de/phpunit-3.7.38.phar" -O
 chmod +x phpunit-3.7.38.phar
 mv phpunit-3.7.38.phar /usr/local/bin/phpunit.phar
 ```
 
-Install composer (first time only)
+MAC Install composer (first time only)
 ```
 brew install composer
+```
+
+DOCKER Init (once per computer)
+```
+php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+php -r "if (hash_file('sha384', 'composer-setup.php') === 'c31c1e292ad7be5f49291169c0ac8f683499edddcfd4e42232982d0fd193004208a58ff6f353fde0012d35fdd72bc394') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+php composer-setup.php
+php -r "unlink('composer-setup.php');"
+```
+NOTE: You will need a github token for the installation process to get all required files and install
+
+DOCKER Install
+```
+
 ```
 
 Ensure your composer.json file in /src includes 
@@ -276,4 +297,4 @@ Line endings were all messed up by a windows machine.
 -Logon to the docker machine (docker exec -it docker_web_1 bash)
 -apt-get update
 -apt-get install dos2unix
--find . -type f -print0 | xargs -0 dos2unix
+    find . -type f -print0 | xargs -0 dos2unix
