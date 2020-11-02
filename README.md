@@ -317,7 +317,6 @@ It is split into 3 separate functions for readability.
     function getSales($season_id) {
 		$conditions = array('AND' => array(
 			array('Sale.season_id' => $season_id),
-			//array('RebateSupplier.active' => 1),
 		));
 		$sales = $this->find('all', array(
 			'recursive' => -1,
