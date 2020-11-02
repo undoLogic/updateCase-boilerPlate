@@ -298,3 +298,94 @@ Line endings were all messed up by a windows machine.
 -apt-get update
 -apt-get install dos2unix
     find . -type f -print0 | xargs -0 dos2unix
+    
+    
+    
+
+
+## Programming Concepts
+
+```
+    function getSales($season_id) {
+		$conditions = array('AND' => array(
+			array('Sale.season_id' => $season_id),
+			//array('RebateSupplier.active' => 1),
+		));
+		$sales = $this->find('all', array(
+			'recursive' => -1,
+			'contain' => array(),
+			'conditions' => $conditions,
+		));
+		$records = $this->groupSalesByCategory($sales);
+		$sales = array(); //clear the original array
+		return $records;
+	}
+
+	var $salesArray = array();
+	function groupSales($sales) {
+
+		foreach ($sales as $saleKey => $sale) {
+
+			$season_id = $sale['Sale']['season_id'];
+			$category_id = $sale['Sale']['category_id'];
+			$supplier_id = $sale['Sale']['supplier_id'];
+			
+			$this->prepareSalesArray($season_id, $category_id, $supplier_id);
+			
+			//calculations
+			$this->salesArray['Seasons'][$season_id]['total'] += $sale['Sale']['amount'];
+			$this->salesArray['Seasons'][$season_id]['Categories'][$category_id]['total'] += $sale['Sale']['amount'];
+			$this->salesArray['Seasons'][$season_id]['Categories'][$category_id]['Suppliers'][$supplier_id]['total'] += $sale['Sale']['amount'];
+		}
+		
+		return $this->salesArray();
+
+	}
+
+	private function prepareSalesArray($season_id, $category_id, $supplier_id) {
+
+		$seasonInit = array('name' => '', 'total' => 0);
+		$categoryInit = array('name' => '', 'total' => 0);
+		$supplierInit = array('name' => '', 'total' => 0);
+
+		/////SEASONS
+		if (!isset($this->salesArray['Seasons'])) {
+			$this->salesArray['Seasons'] = array();
+		}
+		if (!isset($this->salesArray['Seasons'][$season_id])) {
+			$this->salesArray['Seasons'][$season_id] = array();
+			foreach ($seasonInit as $k => $v) {
+				if (!isset( $this->salesArray['Seasons'][$season_id][ $k ] )) {
+					$this->salesArray['Seasons'][$season_id][ $k ] = $v;
+				}
+			}
+		}
+
+		///// CATEGORIES
+		if (!isset($this->salesArray['Seasons'][$season_id]['Categories'])) {
+			$this->salesArray['Seasons'][$season_id]['Categories'] = array();
+		}
+		if (!isset($this->salesArray['Seasons'][$season_id]['Categories'][ $category_id ])) {
+			$this->salesArray['Seasons'][$season_id]['Categories'][ $category_id ] = array();
+			foreach ($categoryInit as $k => $v) {
+				if (!isset($this->salesArray['Seasons'][$season_id]['Categories'][ $category_id ][ $k ])) {
+					$this->salesArray['Seasons'][$season_id]['Categories'][ $category_id ][ $k ] = $v;
+				}
+			}
+		}
+
+		///// SUPPLIERS
+		if (!isset($this->salesArray['Seasons'][$season_id]['Categories'][$category_id]['Suppliers'])) {
+			$this->salesArray['Seasons'][$season_id]['Categories'][ $category_id ]['Suppliers'] = array();
+		}
+		if (!isset($this->salesArray['Seasons'][$season_id]['Categories'][$category_id]['Suppliers'][$supplier_id])) {
+			$this->salesArray['Seasons'][$season_id]['Categories'][ $category_id ]['Suppliers'][$supplier_id] = array();
+			foreach ($supplierInit as $k => $v) {
+				if (!isset($this->salesArray['Seasons'][$season_id]['Categories'][ $category_id ]['Suppliers'][$supplier_id][ $k ])) {
+					$this->salesArray['Seasons'][$season_id]['Categories'][ $category_id ]['Suppliers'][$supplier_id][ $k ] = $v;
+				}
+			}
+		}
+	}
+
+```
