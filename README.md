@@ -305,6 +305,14 @@ Line endings were all messed up by a windows machine.
 
 ## Programming Concepts
 
+### i. Calculating data with a multi-tiered structure
+This allows to efficiently convert a basic array into a multi-tiered array that calculates by custom fields
+It is split into 3 separate functions for readability. 
+- As you need to calculate more values simply add to the 'init' in the prepare function
+- then in the groupSales function you can add a single line to calculate 
+- If you are not structuring with Season, Category, Supplier, you can change i.e. you can instead do Supplier, Season, Category which would allow to total all sales first by the Supplier (opposed to our example first by Season)
+- this also allows to set this array to the front-end view and iterate thorugh and simply display the totals (keeping your front-end simple and clean) 
+
 ```
     function getSales($season_id) {
 		$conditions = array('AND' => array(
