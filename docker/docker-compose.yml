@@ -1,7 +1,8 @@
 version: "2.0"
 services:
   web:
-    #image: "linux_web:a" #OR
+    #image: "undologic/php5" #OR
+    #image: "php:7.2-apache"
     build: ./web
     ports:
       - "80:80"
@@ -10,7 +11,8 @@ services:
       DATABASE_NAME: local
     volumes:
       - ../.:/var/www/vhosts/website.com/www
-      #- ./sites-available/:/etc/apache2/sites-available/
+      - ./sites-available/:/etc/apache2/sites-available/
+      - ./control/.:/var/www/html
       #- ./ssl/:/var/www/vhosts/website.com/ssl/
 #    links:
 #      - db

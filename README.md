@@ -213,10 +213,10 @@ Login to your docker shell
 
 ```angular2
 cd docker
-docker ps
-# find the 'web' 
-docker exec -it docker_web_1 bash 
-# You are now logged into the docker 
+dockerps
+# find the 'web'
+docker exec -it docker_web_1 bash
+# You are now logged into the docker
 cd /var/www/vhosts/website.com/
 cd www
 cd app (cd /path/to/app)
