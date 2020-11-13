@@ -1,9 +1,8 @@
 version: "2.0"
 services:
   web:
-    #image: "undologic/php5" #OR
-    #image: "php:7.2-apache"
     build: ./web
+    image: docker_web7 #allows to have same docker image with different versions php5/php7 etc
     ports:
       - "80:80"
       - "443:443"
