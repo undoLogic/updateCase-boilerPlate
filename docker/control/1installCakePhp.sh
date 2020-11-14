@@ -6,6 +6,11 @@ mv 2.x src
 #fix the permissions
 chmod -R 777 src/app/tmp/
 
+#ensure UpdateCase will be ok
+touch src/app/webroot/updateCase.log
+chmod 777 src/app/webroot/updateCase.log
+chmod 777 src/app/webroot/images/ #probabaly needs to be more secure
+
 # Add layout from purchased template
 
 # add the display code

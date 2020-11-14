@@ -1,11 +1,13 @@
 # CakePHP #
 #################################################
-/app/tmp/cache/*
-/app/tmp/logs/*
-/app/webroot/images/182/*.jpg
-/app/webroot/images/182/*.png
-/app/Config/Schema/182/*.json
-/app/webroot/updateCase.log
+/src/app/tmp/cache/*
+/src/app/tmp/logs/*
+/src/app/tmp/sessions/*
+/src/app/tmp/tests/*
+/src/app/webroot/images/124/*.jpg
+/src/app/webroot/images/124/*.png
+/src/app/Config/Schema/124/*.json
+/src/app/webroot/updateCase.log
 /src/composer.lock
 
 # IDE and editor specific files #
