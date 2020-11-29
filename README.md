@@ -107,7 +107,7 @@ are not saved into Git as they are always downloaded as required from the server
 
 ## B. Visual Development
 
-### Step 7: Create all your visual pages (concept ONLY)
+### Step 9: Create all your visual pages (concept ONLY)
 Build up your navigation and build your site without any database or api connections
 - Create all the concept pages in the 'Pages' controller
 - Using the display function so you only have to create the ctp pages and you do NOT need to create a controller/action for each page 
@@ -117,14 +117,14 @@ This will only allow (after programming) to limit the logon to 'client' user_typ
 -> This allows to prepare and concept out which pages get the correct prefix in advance.
 
 
-### Step 16: Folder organization with version letter
+### Step 10: Folder organization with version letter
 All folders (elements, css, js, etc) need to have a letter indicating the version. 
 This letter is also the same as the current layout. 
 Css files also connect to this letter version name: styles-A.css 
 Elements folder should have a directory with the version letter Elements/A/files...
 This setup allows to do quick A/B testing by setting which version letter is active in the beforeFilter
 
-### Step 17: Efficient integration of new scripts
+### Step 11: Efficient integration of new scripts
 In order to efficiently integrate new modules, 
 you should store all source files in 'modules/NAME' within the webroot
 1. Test that the script works before you integrate into the cakePHP code
@@ -132,7 +132,7 @@ you should store all source files in 'modules/NAME' within the webroot
 3. After you have confirmed it is working in modules and a blank page, next integrate the code into the project using the layout
 4. After it is all working if you want you can refactor the scripts
 
-### Step 10: Add Layout
+### Step 12: Add Layout
 Move the layout from the root (that was added at step 3) and into the cakePHP structure
 - WEBROOT/modules/layoutName
 Now integrate into (Views/Layouts/default.ctp) 
@@ -155,7 +155,7 @@ will become
 
 IMPORTANT: Make sure you do NOT change href='#' as this will cause problems if you add "....$base; ?>#...."
 
-### Step 8: Approve
+### Step 13: Approve
 Approve all the visual changes with your client BEFORE starting any programming, database development, etc. 
 Ideas only really start getting figured out when clients are seeing visual working models. 
 So hold back on programming until the the only feedback you are getting is small changes
@@ -164,7 +164,7 @@ Spent time brainstorming with your client and narrow down a very intuitive conce
 
 ## Programming
 
-### Step 9: Adding functional testing
+### Step 14: Adding functional testing
 Allows to setup automated testing to ensure your important functions in your project behave the same before launch. 
 This allows for rapid development. 
 
@@ -237,7 +237,7 @@ class PageTest extends CakeTestCase
 ```
 
 
-### Step 11: Bake Models (if required)
+### Step 15: Bake Models (if required)
 The models are created by using BAKE
 
 in the terminal navigate to the base directory of your project
@@ -257,7 +257,7 @@ cd app (cd /path/to/app)
 ```
 
 
-### Step 14: Programming
+### Step 16: Programming
 Now that all the visuals are approved and all the concepts that need to be programmed have been visualized, the programming should now convert
 the visual pages into fully working systems that may interact with a database, external api, etc.
 
@@ -276,7 +276,7 @@ However... as soon as any page requires complicated programming immediately impl
 IMPORTANT: You should name all of your functions / methods the exact same between all controllers / models / views. you can prepend words to fit into your 
 logic, but with the same name you can easily diagnose issues and find references efficiently. 
 
-### Step 15: Overview
+### Step 17: Overview
 At this point you have a fully functional docker running with a custom website all that is left is a way to automate the publishing to your Staging / LIVE locations. 
 Create an automated pipeline
 - Each feature is developed in a branch
@@ -285,15 +285,21 @@ Create an automated pipeline
 - Manually if MASTER is working a RELEASE is created 
 - Automated system take the release / test and if success push to LIVE
 
-
 ### Step 18: Logging
-Logging needs to HELP support and troubleshooting NOT only your development. 
-What does that mean, it means create levels of logs. 
--- Highlevel: should outlines which functions / methods are being accessed and general state
+Logging needs to HELP support troubleshooting the steps your system is taking. 
+Ensure your softwre has the following logs for all complex operations 
+-- Info: should outlines which functions / methods are being accessed and general state
 -- Debug: this can have detailed info which can fill the screen that developers use. So you can put a stop point and look at that state to continue development. 
 
-### Troubleshooting
-Line endings were all messed up by a windows machine. 
+### Step 19: Finalizing a project
+Leading up to your ALPHA launch the following should be address
+- You should have logs that are accessible within the software. This means it is possible to see any issues without viewing linux logs and you can simply login and view the recent activity. 
+- The most important logs to be first lauched are: debug.log (used to develop the software) & info.log (clear messages about what is happening)
+- Logs should be used to develop so this forces you to keep them clean and concise. 
+
+## B. Troubleshooting
+
+###Line endings were all messed up by a windows machine. 
 -Logon to the docker machine (docker exec -it docker_web_1 bash)
 -apt-get update
 -apt-get install dos2unix
@@ -301,9 +307,7 @@ Line endings were all messed up by a windows machine.
     
     
     
-
-
-## Programming Concepts
+## C. Programming Concepts
 
 ### i. Calculating data with a multi-tiered structure
 This allows to efficiently convert a basic array into a multi-tiered array that calculates by custom fields
