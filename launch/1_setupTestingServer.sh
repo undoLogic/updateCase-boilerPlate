@@ -13,6 +13,17 @@ BROWSER_LOCAL_PATH_WITH_PROGRAM=$(grep '^ *"BROWSER_LOCAL_PATH_WITH_PROGRAM":' s
 #
 #
 #
+GITHUB_CURRENT_BRANCH=$(git branch --show-current)
+if [ $GITHUB_CURRENT_BRANCH = "master" ]; then
+  GITHUB_CURRENT_BRANCH="trunk"
+else
+  GITHUB_CURRENT_BRANCH="branches/$GITHUB_CURRENT_BRANCH"
+fi
+
+echo  $SSH_USER@$SSH_HOST "cd $TESTING_ABSOLUTE_PATH && rm -rf $GITHUB_CURRENT_BRANCH && svn export --force --no-auth-cache --username $GITHUB_USERNAME --password $GITHUB_PASSWORD https://@github.com/$GITHUB_USER_SLASH_PROJECT/$GITHUB_CURRENT_BRANCH $TESTING_ABSOLUTE_PATH/$GITHUB_CURRENT_BRANCH" && echo ""
+
+read -p "Press enter to continue"
+
 ssh $SSH_USER@$SSH_HOST "cd $TESTING_ABSOLUTE_PATH && rm -rf $GITHUB_CURRENT_BRANCH && svn export --force --no-auth-cache --username $GITHUB_USERNAME --password $GITHUB_PASSWORD https://@github.com/$GITHUB_USER_SLASH_PROJECT/$GITHUB_CURRENT_BRANCH $TESTING_ABSOLUTE_PATH/$GITHUB_CURRENT_BRANCH" && echo ""
 #open firefox new tab with link
 #figure out how to pass spaces from the settings page to here as the space is ending the variable
