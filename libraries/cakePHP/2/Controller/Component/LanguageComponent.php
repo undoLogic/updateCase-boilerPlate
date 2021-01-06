@@ -5,17 +5,25 @@
 App::uses('Component', 'Controller');
 
 /**
+ *
+ *
+Add to the view / layout
+<a href="<?= $this->webroot.$this->params['url']; ?>?Lang=EN" <?php if ($lang == 'en'): ?>class="active"<?php endif; ?>>English</a>
+<a href="<?= $this->webroot.$this->params['url']; ?>?Lang=FR" <?php if ($lang == 'fr'): ?>class="active"<?php endif; ?>>French</a>
+<a href="<?= $this->webroot.$this->params['url']; ?>?Lang=ES" <?php if ($lang == 'sp'): ?>class="active"<?php endif; ?>>Spanish</a>
+ *
+ *
+ *
  * Class LanguageComponent
  * usage
  * in app_controller
 
-READ INSTRUCTIONS
-system/language.txt
-
 add to core
 Configure::write('Config.language', 'eng');
 
-$components = array('System.Language');
+$components = array('Language');
+
+//Add to App_controller
 
 function setupLanguage() {
 //language stuff
@@ -28,27 +36,41 @@ if (isset($this->params[ 'language' ])) {
 $this->Language->setParams($this->params[ 'language' ]);
 }
 //or we are going to check out session of cookie for a already selected language
-$this->Language->setSession($this->Session);
-$this->Language->setCookie($this->Cookie);
+$this->Language->setSession(
+$this->Session
+);
+//$this->Language->setCookie($this->Cookie);
 //and fall back to the default if not set yet
 $this->Language->setDefaultLanguage(Configure::read('Config.language'));
 $currLang = $this->Language->currLang();
 
+//pr ($currLang);exit;
 switch ($currLang) {
 case 'fre':
 $this->set('langFR', TRUE);
 $this->set('lang', 'fr');
 $this->set('currLang', $currLang);
-$this->Cookie->write('currLang', 'fre', NULL, '+350 day');
+//$this->Cookie->write('currLang', 'fre', NULL, '+350 day');
 Configure::write('Config.language', 'fre');
+Configure::write('UpdateCase.language', 'fre');
+break;
+
+case 'spa':
+$this->set('langSP', TRUE);
+$this->set('lang', 'sp');
+$this->set('currLang', $currLang);
+//$this->Cookie->write('currLang', 'es-mx', NULL, '+350 day');
+Configure::write('Config.language', 'es-mx');
+Configure::write('UpdateCase.language', 'es-mx');
 break;
 
 default:
 $this->set('lang', 'en');
 $this->set('langEN', TRUE);
 $this->set('currLang', $currLang);
-$this->Cookie->write('currLang', 'eng', NULL, '+350 day');
+//$this->Cookie->write('currLang', 'eng', NULL, '+350 day');
 Configure::write('Config.language', 'eng');
+Configure::write('UpdateCase.language', 'eng');
 }
 }
  *
@@ -68,7 +90,12 @@ class LanguageComponent extends Component {
         'en-us' => 'eng',
         'fr-ca' => 'fre',
         '1' => 'fre',
-        '' => 'eng'
+        '' => 'eng',
+        'es-mx' => 'spa',
+        'spa' => 'spa',
+        'es' => 'spa',
+        'ES' => 'spa'
+
     );
     var $defaultLang = 'eng';
 
