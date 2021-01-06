@@ -102,9 +102,16 @@ class LanguageComponent extends Component {
     var $debug = true;
 
     function debug($name) {
-        if ($this->debug) {
-            return $name;
+        $this->writeToLog('debug', $name, true);
+    }
+
+    public function writeToLog($filename, $message, $newLine = true) {
+        if ($newLine) {
+            $message = "\n".date('Ymd-His').' > '.$message;
+        } else {
+            $message = ' > '.$message;
         }
+        file_put_contents(APP.'tmp/logs/'.$filename.'.log', $message, FILE_APPEND);
     }
 
     function reset() {
@@ -120,7 +127,7 @@ class LanguageComponent extends Component {
         //lowest priority
         if (!empty($this->get)) {
             $activeLang = $this->variations($this->get);
-            $this->debug('get');
+            $this->debug('get: '.$this->get);
         }
 
         //if the session was saved
@@ -128,14 +135,16 @@ class LanguageComponent extends Component {
         //pr ('ddd'.$sessionLang);exit;
         if (!empty($sessionLang)) {
             $activeLang = $sessionLang;
-            $this->debug('session');
+            $this->debug('session: '.$sessionLang);
         }
 
         //browser currently set to
         if (!empty($this->params)) {
             $activeLang = $this->variations($this->params);
-            $this->debug('activeparams');
+            $this->debug('activeparams: '.json_encode($this->params));
         }
+
+        $this->setSessionLang($activeLang);
 
         //fall back to the browser setting
         if (empty($activeLang)) {
