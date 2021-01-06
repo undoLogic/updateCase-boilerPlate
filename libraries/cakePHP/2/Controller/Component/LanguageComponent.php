@@ -124,18 +124,18 @@ class LanguageComponent extends Component {
 
         $activeLang = '';
 
-        //lowest priority
-        if (!empty($this->get)) {
-            $activeLang = $this->variations($this->get);
-            $this->debug('get: '.$this->get);
-        }
-
         //if the session was saved
         $sessionLang = $this->getSessionLang();
         //pr ('ddd'.$sessionLang);exit;
         if (!empty($sessionLang)) {
             $activeLang = $sessionLang;
             $this->debug('session: '.$sessionLang);
+        }
+
+        //lowest priority
+        if (!empty($this->get)) {
+            $activeLang = $this->variations($this->get);
+            $this->debug('get: '.$this->get);
         }
 
         //browser currently set to
