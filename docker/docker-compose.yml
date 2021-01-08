@@ -11,7 +11,7 @@ services:
     volumes:
       - ../.:/var/www/vhosts/website.com/www
       - ./sites-available/:/etc/apache2/sites-available/
-      #- ./ssl/:/var/www/vhosts/website.com/ssl/
+      - ./control/:/var/www/html/
     links:
       - db
 

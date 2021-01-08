@@ -8,9 +8,9 @@ App::uses('Component', 'Controller');
  *
  *
 Add to the view / layout
-<a href="<?= $this->webroot.$this->params['url']; ?>?Lang=EN" <?php if ($lang == 'en'): ?>class="active"<?php endif; ?>>English</a>
-<a href="<?= $this->webroot.$this->params['url']; ?>?Lang=FR" <?php if ($lang == 'fr'): ?>class="active"<?php endif; ?>>French</a>
-<a href="<?= $this->webroot.$this->params['url']; ?>?Lang=ES" <?php if ($lang == 'sp'): ?>class="active"<?php endif; ?>>Spanish</a>
+<a href="<?= $this->webroot.$this->params->url; ?>?Lang=EN" <?php if ($lang == 'en'): ?>class="active"<?php endif; ?>>English</a>
+<a href="<?= $this->webroot.$this->params->url; ?>?Lang=FR" <?php if ($lang == 'fr'): ?>class="active"<?php endif; ?>>French</a>
+<a href="<?= $this->webroot.$this->params->url; ?>?Lang=ES" <?php if ($lang == 'sp'): ?>class="active"<?php endif; ?>>Spanish</a>
  *
  *
  *
@@ -132,7 +132,6 @@ class LanguageComponent extends Component {
             $this->debug('session: '.$sessionLang);
         }
 
-        //lowest priority
         if (!empty($this->get)) {
             $activeLang = $this->variations($this->get);
             $this->debug('get: '.$this->get);
