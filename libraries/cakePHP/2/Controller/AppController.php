@@ -96,6 +96,15 @@ class AppController extends Controller {
         }
     }
 
+    public function writeToLog($filename, $message, $newLine = false) {
+        if ($newLine) {
+            $message = "\n".date('Ymd-His').' > '.$message;
+        } else {
+            $message = ' > '.$message;
+        }
+        file_put_contents(APP.'tmp/logs/'.$filename.'.log', $message, FILE_APPEND);
+    }
+
     function setFrench() {
         $this->Language->setCurrLang('fre', $this->Session, $this->Cookie);
     }

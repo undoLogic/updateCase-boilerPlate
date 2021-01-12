@@ -11,9 +11,20 @@ LIVE_ABSOLUTE_PATH=$(grep '^ *"LIVE_ABSOLUTE_PATH":' settings.json  | awk '{ pri
 BROWSER_LOCAL_PATH_WITH_PROGRAM=$(grep '^ *"BROWSER_LOCAL_PATH_WITH_PROGRAM":' settings.json  | awk '{ print $2 }' | sed -e 's/,$//' -e 's/^"//' -e 's/"$//')
 #
 #
+GITHUB_CURRENT_BRANCH=$(git branch --show-current)
+if [ $GITHUB_CURRENT_BRANCH = "master" ]; then
+  GITHUB_CURRENT_BRANCH="master"
+else
+  GITHUB_CURRENT_BRANCH="branches/$GITHUB_CURRENT_BRANCH"
+fi
+
+echo "ssh " $SSH_USER@$SSH_HOST "rsync -av --omit-dir-times --no-perms $TESTING_ABSOLUTE_PATH/$GITHUB_CURRENT_BRANCH/$SRC_FILES_RELATIVE_PATH/. $LIVE_ABSOLUTE_PATH/." && echo ""
+
+read -p "Press enter to go LIVE"
+
 # Rsync the files from test location to LIVE
 ssh $SSH_USER@$SSH_HOST "rsync -av --omit-dir-times --no-perms $TESTING_ABSOLUTE_PATH/$GITHUB_CURRENT_BRANCH/$SRC_FILES_RELATIVE_PATH/. $LIVE_ABSOLUTE_PATH/." && echo ""
 #open firefox new tab with link
 "C:\Program Files\Firefox Developer Edition\firefox.exe" -new-tab $LIVE_URL
 
-read -p "Press enter to continue"
+read -p "LIVE - Press enter to close"

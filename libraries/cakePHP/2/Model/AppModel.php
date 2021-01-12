@@ -93,13 +93,13 @@ App::uses('Model', 'Model');
         	return $this->jsonResponse(array(), $error_code, $message);
 
 		}
-        public function writeToLog($filename, $message, $newLine = true) {
+        public function writeToLog($filename, $message, $newLine = false) {
             if ($newLine) {
                 $message = "\n".date('Ymd-His').' > '.$message;
             } else {
                 $message = ' > '.$message;
             }
-            file_put_contents(APP.'tmp/logs/'.$filename, $message, FILE_APPEND);
+            file_put_contents(APP.'tmp/logs/'.$filename.'.log', $message, FILE_APPEND);
         }
 
 		public function jsonCreateSelect($array) {
