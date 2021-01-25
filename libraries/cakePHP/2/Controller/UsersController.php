@@ -85,7 +85,6 @@ class UsersController extends AppController {
 	function login() {
 		//pr($this->Auth->password('acs333')); exit;
 
-
 		$this->set('login', true);
 
 		if ($this->request->is('post')) {
@@ -117,10 +116,21 @@ class UsersController extends AppController {
 		}
 	}
 
-
-
 	function home() {
 
 	}
+
+	//used with AngularJS to ensure we are still logged in
+    function isLoggedIn() {
+        $userInfo = $this->Auth->user();
+        if (empty($userInfo)) {
+            die ('440 Login Time-out');
+        } else {
+            die ('200 Logged In');
+        }
+
+        exit;
+    }
+
 
 }
