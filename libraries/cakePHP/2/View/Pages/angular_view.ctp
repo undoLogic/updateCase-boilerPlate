@@ -64,4 +64,4 @@
     </div>
 </div>
 
-<script id="webroot" data-name="<?= $this->webroot; ?>" src="<?= $this->webroot; ?>js/a/angularJS.js"></script>
+<script id="webroot" data-name="<?= $this->webroot; ?>" src="<?= $this->webroot; ?>js/a/pageJS.js"></script>
