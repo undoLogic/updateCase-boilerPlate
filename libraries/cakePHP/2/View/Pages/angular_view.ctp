@@ -21,9 +21,14 @@
                     <div class="row">
                         <div class="col-lg-12">
 
-                            <?php echo $this->Form->create(); ?>
+                            <a ng-click="loadPages()" class="btn btn-warning btn-rounded btn-lg pull-right m-1">
+                                Load
+                            </a>
 
-                            <?= $this->Form->hidden('variable_id', array('type' => 'text')); //allows to move data into the angularJS from here ?>
+
+
+
+                            <?= $this->Form->hidden('variable_id', array('type' => 'text', 'id' => 'page_id', 'default' => 'set_here_from_controller')); //allows to move data into the angularJS from here ?>
 
                             <table class="table responsive" id="entireTable">
                                 <thead>
@@ -41,7 +46,7 @@
                                 <tbody >
 
                                 <tr ng-repeat="page in pages" style="border: 3px solid #177dff;" id="page{{dealer.RebateDealer.id}}">
-                                    <td data-th="<?= $this->Translate->word('Name'); ?>" width="150">
+                                    <td>
                                         {{page.name}}
                                     </td>
                                 </tr>
@@ -59,4 +64,4 @@
     </div>
 </div>
 
-<script id="webroot" data-name="<?= $this->webroot; ?>" src="<?= $this->webroot; ?>js/layouts/a/angularJS.js"></script>
+<script id="webroot" data-name="<?= $this->webroot; ?>" src="<?= $this->webroot; ?>js/a/angularJS.js"></script>

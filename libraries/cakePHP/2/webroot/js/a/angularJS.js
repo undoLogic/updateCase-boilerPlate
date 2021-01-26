@@ -11,6 +11,15 @@ app.controller('pagesCtrl', function ($scope, $http, $window, $location, $interv
     //initial load
     loadPages();
 
+
+    function loadCommonVars() { //get data set in the view
+
+        //DROPDOWN = $('#DROPDOWNID').find(":selected").val();
+        PAGE_ID = $('#variable_id').val();
+    }
+
+
+
     $scope.loadPages = function() { //this allows a button in the view to load our function calls in this object
         //alert('loading dealers');
         loadPages();
@@ -18,13 +27,20 @@ app.controller('pagesCtrl', function ($scope, $http, $window, $location, $interv
 
     function loadPages() {
 
+        loadCommonVars();
+
         loadingColour();
+
+        var objData = {
+            // page: setupSessionSearch('page'),
+        };
 
         let URL = WEBROOT + 'staff/Pages/jsonIndex/'+PAGE_ID+'/';
         console.log(URL);
         $http.post(URL, objData).then(function (response) {
 
-            $scope.data = response.data.dealers;
+            console.log(response.data);
+            $scope.data = response.data;
 
             loadingComplete();
         });
