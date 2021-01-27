@@ -291,6 +291,17 @@ Ensure your softwre has the following logs for all complex operations
 -- Info: should outlines which functions / methods are being accessed and general state
 -- Debug: this can have detailed info which can fill the screen that developers use. So you can put a stop point and look at that state to continue development. 
 
+Manually view the logs:
+```angular2html
+## start within your docker docker
+cd docker
+docker exec -it docker_web_1 bash
+## You are now within the docker container
+tail -F /var/www/vhosts/website.com/www/src/app/tmp/logs/*.log
+## You will now see ALL logs in that directory OR you can log single logs like this
+tail -F /var/www/vhosts/website.com/www/src/app/tmp/logs/debug.log
+```
+
 ### Step 19: Finalizing a project
 Leading up to your ALPHA launch the following should be address
 - You should have logs that are accessible within the software. This means it is possible to see any issues without viewing linux logs and you can simply login and view the recent activity. 
