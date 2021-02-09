@@ -271,6 +271,8 @@ the visual pages into fully working systems that may interact with a database, e
 Create most pages with MVC (MODEL-VIEW-CONTROLLER)
 -> This is fast to setup and most client actually prefer regular single page loading.
 
+All programming requires a visual representation of the functions in a powerpoint / slides type of document. 
+
 However... as soon as any page requires complicated programming immediately implement AngularJS (API style development)
 - This will force you to create a solid API structure that will keep your code of good quality moving forward. 
 - Create a model that will get the data you require from the database
