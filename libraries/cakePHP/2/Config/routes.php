@@ -38,10 +38,10 @@ Router::connect('/reset', array(
 
 //////// language specific - uncomment if you want to use
 
-//    Router::connect('/:language/:controller/:action/*', array(), array(
-//        'language' => '[a-z]{3}',
-//
-//    ));
+    Router::connect('/:language/:controller/:action/*', array(), array(
+        'language' => '[a-z]{3}',
+
+    ));
 
 //Router::connect('/:prefix/:controller/:action/*', array(), array(
 //	//'language' => '[a-z]{3}',

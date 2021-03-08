@@ -164,7 +164,14 @@ Spent time brainstorming with your client and narrow down a very intuitive conce
 
 ## Programming
 
-### Step 14: Adding functional testing
+### Step 14: Forms
+When programming forms, ensure that your action ends up on a dedicated page (controller action)
+-> since the validation will make it complicated to validate on your initial page (Usually because there is other content)
+-> Use a element to display the form on your initial page, but after you run the form and have validation errors you will end up on a dedicated page. 
+This page will then be a simplier view (without extra content you had on the intial page)
+-> This way the user can continue to enter info until the validation passes and then you redirect to the next action.
+
+### Step 15: Adding functional testing
 Allows to setup automated testing to ensure your important functions in your project behave the same before launch. 
 This allows for rapid development. 
 
@@ -242,7 +249,7 @@ class PageTest extends CakeTestCase
 ```
 
 
-### Step 15: Bake Models (if required)
+### Step 16: Bake Models (if required)
 The models are created by using BAKE
 
 in the terminal navigate to the base directory of your project
@@ -262,12 +269,14 @@ cd app (cd /path/to/app)
 ```
 
 
-### Step 16: Programming
+### Step 17: Programming
 Now that all the visuals are approved and all the concepts that need to be programmed have been visualized, the programming should now convert
 the visual pages into fully working systems that may interact with a database, external api, etc.
 
 Create most pages with MVC (MODEL-VIEW-CONTROLLER)
 -> This is fast to setup and most client actually prefer regular single page loading.
+
+All programming requires a visual representation of the functions in a powerpoint / slides type of document. 
 
 However... as soon as any page requires complicated programming immediately implement AngularJS (API style development)
 - This will force you to create a solid API structure that will keep your code of good quality moving forward. 
@@ -281,7 +290,7 @@ However... as soon as any page requires complicated programming immediately impl
 IMPORTANT: You should name all of your functions / methods the exact same between all controllers / models / views. you can prepend words to fit into your 
 logic, but with the same name you can easily diagnose issues and find references efficiently. 
 
-### Step 17: Overview
+### Step 18: Overview
 At this point you have a fully functional docker running with a custom website all that is left is a way to automate the publishing to your Staging / LIVE locations. 
 Create an automated pipeline
 - Each feature is developed in a branch
@@ -290,13 +299,24 @@ Create an automated pipeline
 - Manually if MASTER is working a RELEASE is created 
 - Automated system take the release / test and if success push to LIVE
 
-### Step 18: Logging
+### Step 19: Logging
 Logging needs to HELP support troubleshooting the steps your system is taking. 
 Ensure your softwre has the following logs for all complex operations 
 -- Info: should outlines which functions / methods are being accessed and general state
 -- Debug: this can have detailed info which can fill the screen that developers use. So you can put a stop point and look at that state to continue development. 
 
-### Step 19: Finalizing a project
+Manually view the logs:
+```angular2html
+## start within your docker docker
+cd docker
+docker exec -it docker_web_1 bash
+## You are now within the docker container
+tail -F /var/www/vhosts/website.com/www/src/app/tmp/logs/*.log
+## You will now see ALL logs in that directory OR you can log single logs like this
+tail -F /var/www/vhosts/website.com/www/src/app/tmp/logs/debug.log
+```
+
+### Step 20: Finalizing a project
 Leading up to your ALPHA launch the following should be address
 - You should have logs that are accessible within the software. This means it is possible to see any issues without viewing linux logs and you can simply login and view the recent activity. 
 - The most important logs to be first lauched are: debug.log (used to develop the software) & info.log (clear messages about what is happening)
