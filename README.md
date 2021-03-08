@@ -176,12 +176,13 @@ chmod +x phpunit-3.7.38.phar
 mv phpunit-3.7.38.phar /usr/local/bin/phpunit.phar
 ```
 
-MAC Install composer (first time only)
+Apple / Mac Install composer (first time only)
 ```
 brew install composer
 ```
 
-DOCKER Init (once per computer)
+DOCKER Init - using PHP (once per computer)
+navigate into 'src' directory
 ```
 php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
 php -r "if (hash_file('sha384', 'composer-setup.php') === 'c31c1e292ad7be5f49291169c0ac8f683499edddcfd4e42232982d0fd193004208a58ff6f353fde0012d35fdd72bc394') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
@@ -191,9 +192,8 @@ php -r "unlink('composer-setup.php');"
 NOTE: You will need a github token for the installation process to get all required files and install
 
 DOCKER Install
-```
 
-```
+Navigate to the source files 'src' directory
 
 Ensure your composer.json file in /src includes 
 ```
@@ -206,6 +206,11 @@ Install based on the composer file
 ```angular2
 cd src
 composer install
+```
+
+OR if you are using command line within the docker container (when you are in the SRC directory)
+```
+php composer.phar install
 ```
 
 You should now be able to navigate and start building your tests
