@@ -117,12 +117,15 @@ This will only allow (after programming) to limit the logon to 'client' user_typ
 -> This allows to prepare and concept out which pages get the correct prefix in advance.
 
 
-### Step 10: Folder organization with version letter
+### Step 10: Organization (files, css, etc)
 All folders (elements, css, js, etc) need to have a letter indicating the version. 
 This letter is also the same as the current layout. 
-Css files also connect to this letter version name: styles-A.css 
-Elements folder should have a directory with the version letter Elements/A/files...
+Elements folder should have a directory with the version letter Elements/A/files... Eg webroot/css/A/added-styles.css OR webroot/images/A/image.jpg
+-> this ensures if needed to we quickly add on a new module (without creating a new branch, in the same branch) and add new features which do not interfere with the current system at all.
 This setup allows to do quick A/B testing by setting which version letter is active in the beforeFilter
+Generally we extended a layout and modify per the clients branding. Create a new file 'added-styles-1.css' where the 1 represents a version, and you can quickly change this number to ensure the browsers cache get's reset (without having the client reset it)
+CSS organization: Within each CSS file ensure you add loose separations between the sections / pages etc.
+-> Eg add a comment at the top to indicate styles for all pages, then create a new comment to indicate styles for a specific page eg /* HOME */ 
 
 ### Step 11: Efficient integration of new scripts
 In order to efficiently integrate new modules, 
@@ -162,7 +165,7 @@ So hold back on programming until the the only feedback you are getting is small
 which are easy to complete after programming is approved. 
 Spent time brainstorming with your client and narrow down a very intuitive concept that just feels right.
 
-## Programming
+## C. Programming
 
 ### Step 14: Forms
 When programming forms, ensure that your action ends up on a dedicated page (controller action)
