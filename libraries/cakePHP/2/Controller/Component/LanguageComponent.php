@@ -183,9 +183,7 @@ class LanguageComponent extends Component {
     }
 
     function setDefaultLanguage($defaultLang) {
-        if (isset($this->variations[ $defaultLang ])) {
-            $this->defaultLang = $this->variations[ $defaultLang ];
-        }
+        $this->defaultLang = $this->variations($defaultLang);
     }
 
     ///////////////////////////////////getters
@@ -193,6 +191,8 @@ class LanguageComponent extends Component {
     private function variations($name) {
         if (isset($this->variations[ $name ])) {
             return $this->variations[ $name ];
+        } else {
+            return false;
         }
     }
 
