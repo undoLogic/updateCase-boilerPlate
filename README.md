@@ -428,3 +428,45 @@ It is split into 3 separate functions for readability.
 	}
 
 ```
+
+
+
+
+## D. Windows Computer installation
+
+### Use Choco to batch install your windows machine (Reformat, Reinstall)
+
+1. First install Choco: https://chocolatey.org/
+
+2. Next run all these commands at the same time (you can remove or add any software that you use yourself)
+```shell
+choco install powertoys
+choco install libreoffice-fresh
+choco install phpstorm --pre
+choco install docker-desktop
+choco install dropbox
+choco install firefox-dev --pre
+choco install git
+choco install tailscale
+choco install steam
+choco install openssh --pre
+
+# programming nodejs
+choco install vcredist140
+
+#-- maybe
+#choco install jetbrains-rider
+#choco install goland
+#choco install mingw
+
+```
+
+manual steps
+
+-- connect apps from software -> side bar
+
+-- connect email
+
+-- phpstorm change command prompt (tools - terminal)
+``` 
+C:\Windows\SysWOW64\WindowsPowerShell\v1.0\powershell.exe
