@@ -62,8 +62,8 @@ class AppController extends Controller {
 
     function setupLanguage()
     {
+
         $this->Language->setSession($this->Session);
-        //$this->Language->reset();
 
         if (isset($_GET['Lang'])) { $this->Language->setGet($_GET['Lang']); }
         if (isset($this->params['language'])) { $this->Language->setParams($this->params['language']); }
@@ -80,19 +80,27 @@ class AppController extends Controller {
 
         Configure::write('currLang', $currLang);
 
+        //switch lang buttons
+        $linkEN = 'eng'.DS.$this->request->params['controller'].DS.$this->request->params['action'];
+        $linkSP = 'spa'.DS.$this->request->params['controller'].DS.$this->request->params['action'];
+        $this->set('switchLinkEN', $linkEN);
+        $this->set('switchLinkSP', $linkSP);
+        //pr ($this->params);exit;
+
+        $GLOBALS['currLang'] = $currLang;
+
         switch ($currLang) {
-            case 'fre':
-                $this->set('langFR', TRUE);
-                $this->set('lang', 'fr');
+            case 'spa':
+                $this->set('langSPA', TRUE);
                 $this->set('currLang', $currLang);
-                Configure::write("UpdateCase.language", "fre"); //define the language in app_controller / globally
+                break;
+            case 'fre':
+                $this->set('langFRE', TRUE);
+                $this->set('currLang', $currLang);
                 break;
             default:
-                Configure::write('currLang', $currLang);
-                $this->set('lang', 'en');
-                $this->set('langEN', TRUE);
+                $this->set('langENG', TRUE);
                 $this->set('currLang', $currLang);
-                Configure::write("UpdateCase.language", "eng"); //define the language in app_controller / globally
         }
     }
 
