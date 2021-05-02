@@ -1,1 +1,0 @@
-src/app/View/Pages/faq.ctp
