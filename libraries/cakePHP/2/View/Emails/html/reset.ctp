@@ -1,1 +1,0 @@
-<?= $this->Element('emailers/reset'); ?>
