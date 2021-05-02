@@ -1,1 +1,0 @@
-FROM undologic/php5
