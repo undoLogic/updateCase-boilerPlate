@@ -6,14 +6,13 @@ This allows both, marketing staff and professional programmers, to work to their
 ### Extends SetupCase
 Our system extends SetupCase which is an open-source system allowing you to efficiently build and manage online software and business websites:
 www.SetupCase.com
-
 Or here is a direct link to the SetupCase-boilerplate:
 https://github.com/undoLogic/setupCase-boilerplate
 
 ### Step 1: Download UpdateCase client
 After you have finished preparing all your source files with setupCase download our open-source client
-https://github.com/undoLogic/updateCase-boilerPlate/updateCase.php
-AND download to your source files: app/webroot/updateCase.php
+https://github.com/undoLogic/updateCase-boilerPlate/blob/master/updateCase.php
+AND download to your source files webroot: app/webroot/updateCase.php
 
 ### Step 2: Configure Token
 Ensure the token matches in the UpdateCase client to your settings screen (updateCase.com).
