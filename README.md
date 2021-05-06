@@ -28,3 +28,21 @@ UpdateCase downloads a json file to (app/Config/Schema/###). You can delete this
 
 ### Step 5: Test
 You should now be able to see content you added on UpdateCase.com into your website.
+
+## API 
+###### This is also available from within our software
+
+### SEO 
+getMetaTitle(), getMetaDescription(), getMetaKeywords()\
+*Allows to control your SEO / organic search engine tags within updateCase*
+
+```
+# Add to your layout within the head tags
+<head>
+    ...
+    <title><?= $updateCase->getMetaTitle(); ?></title>
+    <meta name="description" content="<?= $updateCase->getMetaDescription(); ?>">
+    <meta name="keywords" content="<?= $updateCase->getMetaKeywords(); ?>">
+    ....
+</head>
+```
